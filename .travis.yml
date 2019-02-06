@@ -11,11 +11,11 @@ deploy:
   script: "./gradlew bintrayUpload"
   skip_cleanup: true
   on:
-    repo: hmcts/idam-java-client
+    repo: hmcts/health-springboot-starter
     tags: true
 - provider: releases
   api_key:
-    secure: TQPdJBxE2kJzHk5P9VN4R2VxnSutSV+jWeMzVkn8++IKc5dw3gJ8PP1dmWk5nGESiB/trtp+SAivq07Pn6J1d7LGWNOXR6IbnZNXu6MLXxNOmt4MeFbgkPkQdcXpFbwbxlX3p86eeDO7oNFBzG1ujGiBu2NkB9LFjg1aFUfl0VxLmgKu3+jservLF55wPPdg9B783uU3x5Qg3asFEHDdb6f77jKoXShIDpP0Pg84m5JsPKpPedLYqF4nghbehIlhJdLPZtmdp2svXr2wYY2oyT7TsnccNgBK0e72VNaQ8YwGHR7psQQ7ZVzWye72e579JpbK8KZZ68ximLGH5B6qvWeup3xPbaa/L0fX+OqlxOWHEGDIx2s3d+Fy2KhpiaDGxqs04wInHMVaQ9Q9TCrzbvuBmyWPr13Bnr0kJ2kRVFrsTiJwmOc/UJkPW/sOYO/0cQoAgP9r9NEiMAH9EimNWFxfM6S4/+Uv09TOqxwm/CkSxhK+hNmhHp/Po0CsL+PbQPSG6QcynZlxRoSKLGHPK2xb5eHj2BMFVS8A8NJXXIcX5R+Umvt+iG+807Mgd4WZP2XSmUllLiT7v2JrwDOSk/QPgYLc3zQYMGnY0s8zmj3buvE+g7VV6XQxvyiYs9+9EGo+bnn+tReWKS75w7CB+rQNnt7jwE7Jy5R1s0D5ifE=
+    secure: TODO
   file: build/libs/health-springboot-starter-*.jar
   file_glob: true
   skip_cleanup: true

@@ -13,8 +13,6 @@ This library is the autoconfiguration library for the globally health endpoints 
 
 ## Usage
 
-Components provided by this library will get automatically configured in a Spring context if `idam.api.url` configuration property is defined and does not equal `false`. 
-
 ## Building
 
 The project uses [Gradle](https://gradle.org) as a build tool but you don't have install it locally since there is a

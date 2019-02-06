@@ -5,7 +5,7 @@ as we have some expectations related to the content and quality of change sets.
 
 ## What you should know about this application
 
-This project is a microservice for providing ’save and resume’ functionality
+This project is an auto-configuration module to add liveness and health check functionality to the hmcts springboot applications.
 
 ## Before contributing
 
