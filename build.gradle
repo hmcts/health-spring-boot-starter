@@ -125,7 +125,7 @@ publishing {
 
       pom {
         name = 'health-spring-boot-starter'
-        description = 'HMCTS health spring boot start'
+        description = 'HMCTS health spring boot starter'
         url = gitRepo
         licenses {
           license {
