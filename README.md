@@ -3,9 +3,9 @@
 [![Build Status](https://travis-ci.com/hmcts/health-spring-boot-starter.svg?branch=master)](https://travis-ci.com/hmcts/health-spring-boot-starter)
 [ ![Download](https://api.bintray.com/packages/hmcts/hmcts-maven/health-spring-boot-starter/images/download.svg) ](https://bintray.com/hmcts/hmcts-maven/health-spring-boot-starter/_latestVersion)
 
-This library is a spring auto-configuration library used to configure the health enpoints needed for the HMCTS projects.
-Currently this library contains only the liveness NOP health check needed for Kubernetes to properly operate. 
-The intention for this library is for any extra organisationally customised health to be implemented here and autoconfigured for the projects.
+This is a Spring Boot _starter_ library whose purpose is to autoconfigure any custom HMCTS actuator health endpoints.
+Currently this library contains only the liveness _NOP_ health check needed for Kubernetes to properly operate without restarting the pod. 
+The intention for this library is for any extra organisationally customised health to be implemented here and auto-configured for the projects.
  
 Currently this module automatically adds the liveness health detail item which then can be access via `[managment]/health/liveness`
 Where:
