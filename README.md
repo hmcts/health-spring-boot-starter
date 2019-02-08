@@ -1,7 +1,7 @@
 # HMCTS health library
 
-[![Build Status](https://travis-ci.com/hmcts/health-springboot-starter.svg?branch=master)](https://travis-ci.com/hmcts/health-springboot-starter)
-[ ![Download](https://api.bintray.com/packages/hmcts/hmcts-maven/health-springboot-starter/images/download.svg) ](https://bintray.com/hmcts/hmcts-maven/health-springboot-starter/_latestVersion)
+[![Build Status](https://travis-ci.com/hmcts/health-spring-boot-starter.svg?branch=master)](https://travis-ci.com/hmcts/health-spring-boot-starter)
+[ ![Download](https://api.bintray.com/packages/hmcts/hmcts-maven/health-spring-boot-starter/images/download.svg) ](https://bintray.com/hmcts/hmcts-maven/health-spring-boot-starter/_latestVersion)
 
 This library is the autoconfiguration library for the globally health endpoints needed for 
 
