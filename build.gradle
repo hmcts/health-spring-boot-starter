@@ -113,7 +113,7 @@ task javadocJar(type: Jar) {
   from javadoc.destinationDir
 }
 
-def gitRepo = "https://github.com/hmcts/health-springboot-starter"
+def gitRepo = "https://github.com/hmcts/health-spring-boot-starter"
 
 publishing {
   publications {
@@ -124,7 +124,7 @@ publishing {
       artifact javadocJar
 
       pom {
-        name = 'health-springboot-starter'
+        name = 'health-spring-boot-starter'
         description = 'Global health enpoints for hmcts'
         url = gitRepo
         licenses {
@@ -148,7 +148,7 @@ bintray {
   publish = true
   pkg {
     repo = 'hmcts-maven'
-    name = 'health-springboot-starter'
+    name = 'health-spring-boot-starter'
     userOrg = 'hmcts'
     licenses = ['MIT']
     vcsUrl = gitRepo
