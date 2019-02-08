@@ -92,7 +92,7 @@ sonarqube {
 
 dependencyUpdates.resolutionStrategy = {
   componentSelection {
-    all { ComponentSelection selection, ComponentMetadata metadata ->
+    all { ComponentSelection selection ->
       boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
         selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
       }
