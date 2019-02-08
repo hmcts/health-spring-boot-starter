@@ -9,6 +9,7 @@
   <rule ref="category/java/bestpractices.xml">
     <exclude name="GuardLogStatement" />
     <exclude name="JUnitTestContainsTooManyAsserts" />
+    <exclude name="JUnitTestsShouldIncludeAssert" />
   </rule>
   <rule ref="category/java/codestyle.xml">
     <exclude name="AtLeastOneConstructor" />
@@ -17,6 +18,8 @@
     <exclude name="MethodArgumentCouldBeFinal" />
     <exclude name="OnlyOneReturn" />
     <exclude name="TooManyStaticImports" />
+    <exclude name="DefaultPackage" />
+    <exclude name="CommentDefaultAccessModifier" />
   </rule>
   <rule ref="category/java/codestyle.xml/ClassNamingConventions">
     <properties>
