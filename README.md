@@ -3,20 +3,20 @@
 [![Build Status](https://travis-ci.com/hmcts/health-spring-boot-starter.svg?branch=master)](https://travis-ci.com/hmcts/health-spring-boot-starter)
 [ ![Download](https://api.bintray.com/packages/hmcts/hmcts-maven/health-spring-boot-starter/images/download.svg) ](https://bintray.com/hmcts/hmcts-maven/health-spring-boot-starter/_latestVersion)
 
-This library is the auto-configuration library. Currently this library contains only the addtionsal NOP health check
- for the liveness endpoint needed for Kubernettes to properly operate. The intention is any organisationally customised 
- health checks needed should be implemented here and they will autoconfigure themselves.
+This library is a spring auto-configuration library used to configure the health enpoints needed for the HMCTS projects.
+Currently this library contains only the liveness NOP health check needed for Kubernetes to properly operate. 
+The intention for this library is for any extra organisationally customised health to be implemented here and autoconfigured for the projects.
  
-This module automatically adds the liveness health detail item which then can be access via [managment]/health/liveness
+Currently this module automatically adds the liveness health detail item which then can be access via `[managment]/health/liveness`
 Where:
-- [managment] is where the actuator endpoints are configured. Typically in HMCTS we configure it to `/`
+- `[managment]` is where the actuator endpoints are configured. Typically in HMCTS we configure it to `/`
  
 ## Usage
 Super simple just like all Spring boot starters just include the module into the dependency list.
 ```groovy
  compile 'uk.gov.hmcts.reform:health-spring-boot-starter:x.x.x'
 ```
-To make sure the health checks fit into the HMCTS standard add this to the application.yaml
+To make sure the health checks fit into the HMCTS standard we need to add this yaml snippet to the application.yaml
 ```yaml
 management:
   endpoint:
