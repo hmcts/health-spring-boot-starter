@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '0.0.2'
+version '0.0.3'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -144,7 +144,7 @@ publishing {
 bintray {
   user = System.getenv('BINTRAY_USER')
   key = System.getenv('BINTRAY_KEY')
-  publications = ['Main']
+  publications = ['mavenJava']
   publish = true
   pkg {
     repo = 'hmcts-maven'
