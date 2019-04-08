@@ -19,29 +19,12 @@ version '0.0.3'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-sourceSets {
-  integrationTest {
-    java {
-      compileClasspath += main.output
-      runtimeClasspath += main.output
-      srcDir file('src/integrationTest/java')
-    }
-    resources.srcDir file('src/integrationTest/resources')
-  }
-}
-
-task integration(type: Test, description: 'Runs the integration tests.', group: 'Verification') {
-  testClassesDirs = sourceSets.integrationTest.output.classesDirs
-  classpath = sourceSets.integrationTest.runtimeClasspath
-}
-
 tasks.withType(JavaCompile) {
   options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror"
 }
 
-tasks.withType(Test) {
+test {
   useJUnitPlatform()
-  failFast = true
 
   testLogging {
     exceptionFormat = 'full'
@@ -63,7 +46,7 @@ checkstyle {
 
 pmd {
   toolVersion = "6.9.0"
-  sourceSets = [sourceSets.main, sourceSets.test, sourceSets.integrationTest]
+  sourceSets = [sourceSets.main, sourceSets.test]
   reportsDir = file("$project.buildDir/reports/pmd")
   ruleSetFiles = files("config/pmd/ruleset.xml")
 }
@@ -77,7 +60,7 @@ dependencyCheck {
 }
 
 jacocoTestReport {
-  executionData(test, integration)
+  executionData(test)
   reports {
     xml.enabled = true
     csv.enabled = false
@@ -85,12 +68,11 @@ jacocoTestReport {
   }
 }
 
-project.tasks['sonarqube'].dependsOn test, integration
+project.tasks['sonarqube'].dependsOn test
 sonarqube {
   properties {
     property "sonar.projectName", "Reform :: Health starter"
     property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
-    property "sonar.jacoco.itReportPath", "${project.buildDir}/jacoco/integration.exec"
   }
 }
 
@@ -184,10 +166,6 @@ dependencies {
 
   testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
   testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
-
-  integrationTestCompile sourceSets.main.runtimeClasspath
-  integrationTestCompile sourceSets.test.runtimeClasspath
-
 }
 
 wrapper {
