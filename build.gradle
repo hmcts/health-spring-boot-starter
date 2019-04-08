@@ -30,18 +30,22 @@ sourceSets {
   }
 }
 
+task integration(type: Test, description: 'Runs the integration tests.', group: 'Verification') {
+  testClassesDirs = sourceSets.integrationTest.output.classesDirs
+  classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
 tasks.withType(JavaCompile) {
   options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror"
 }
 
-test {
+tasks.withType(Test) {
   useJUnitPlatform()
-}
+  failFast = true
 
-task integration(type: Test, description: 'Runs the integration tests.', group: 'Verification') {
-  testClassesDirs = sourceSets.integrationTest.output.classesDirs
-  classpath = sourceSets.integrationTest.runtimeClasspath
-  useJUnitPlatform()
+  testLogging {
+    exceptionFormat = 'full'
+  }
 }
 
 task printVersion {
@@ -188,10 +192,6 @@ dependencies {
 
 wrapper {
   distributionType = Wrapper.DistributionType.ALL
-}
-
-test {
-  useJUnitPlatform()
 }
 
 bootJar {
