@@ -165,7 +165,7 @@ repositories {
 }
 
 def versions = [
-  junit: '5.4.0',
+  junit: '5.4.2',
 ]
 
 dependencies {
