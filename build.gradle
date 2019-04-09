@@ -2,11 +2,11 @@ plugins {
   id 'checkstyle'
   id 'jacoco'
   id 'pmd'
-  id 'io.spring.dependency-management' version '1.0.6.RELEASE'
-  id 'org.springframework.boot' version '2.1.2.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.7.RELEASE'
+  id 'org.springframework.boot' version '2.1.4.RELEASE'
   id 'com.jfrog.bintray' version '1.8.4'
   id 'org.owasp.dependencycheck' version '4.0.2'
-  id 'com.github.ben-manes.versions' version '0.20.0'
+  id 'com.github.ben-manes.versions' version '0.21.0'
   id 'org.sonarqube' version '2.7'
   id 'java-library'
   id 'maven-publish'
@@ -14,21 +14,10 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '0.0.3'
+version '0.0.4'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-sourceSets {
-  integrationTest {
-    java {
-      compileClasspath += main.output
-      runtimeClasspath += main.output
-      srcDir file('src/integrationTest/java')
-    }
-    resources.srcDir file('src/integrationTest/resources')
-  }
-}
 
 tasks.withType(JavaCompile) {
   options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror"
@@ -36,12 +25,10 @@ tasks.withType(JavaCompile) {
 
 test {
   useJUnitPlatform()
-}
 
-task integration(type: Test, description: 'Runs the integration tests.', group: 'Verification') {
-  testClassesDirs = sourceSets.integrationTest.output.classesDirs
-  classpath = sourceSets.integrationTest.runtimeClasspath
-  useJUnitPlatform()
+  testLogging {
+    exceptionFormat = 'full'
+  }
 }
 
 task printVersion {
@@ -52,14 +39,14 @@ task printVersion {
 
 checkstyle {
   maxWarnings = 0
-  toolVersion = '8.14'
+  toolVersion = '8.19'
   // need to set configDir to rootDir otherwise submodule will use submodule/config/checkstyle
   configDir = new File(rootDir, 'config/checkstyle')
 }
 
 pmd {
   toolVersion = "6.9.0"
-  sourceSets = [sourceSets.main, sourceSets.test, sourceSets.integrationTest]
+  sourceSets = [sourceSets.main, sourceSets.test]
   reportsDir = file("$project.buildDir/reports/pmd")
   ruleSetFiles = files("config/pmd/ruleset.xml")
 }
@@ -73,7 +60,7 @@ dependencyCheck {
 }
 
 jacocoTestReport {
-  executionData(test, integration)
+  executionData(test)
   reports {
     xml.enabled = true
     csv.enabled = false
@@ -81,12 +68,11 @@ jacocoTestReport {
   }
 }
 
-project.tasks['sonarqube'].dependsOn test, integration
+project.tasks['sonarqube'].dependsOn test
 sonarqube {
   properties {
     property "sonar.projectName", "Reform :: Health starter"
     property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
-    property "sonar.jacoco.itReportPath", "${project.buildDir}/jacoco/integration.exec"
   }
 }
 
@@ -164,10 +150,6 @@ repositories {
   mavenCentral()
 }
 
-def versions = [
-  junit: '5.4.0',
-]
-
 dependencies {
   compile(
     "org.springframework.boot:spring-boot-starter-web",
@@ -175,23 +157,16 @@ dependencies {
     "org.springframework.boot:spring-boot-starter-validation",
   )
 
-  testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: versions.junit
-  testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: versions.junit
+  testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.4.2'
 
-  testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+  testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', {
+    exclude group: 'junit', module: 'junit'
+  }
   testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
-
-  integrationTestCompile sourceSets.main.runtimeClasspath
-  integrationTestCompile sourceSets.test.runtimeClasspath
-
 }
 
 wrapper {
   distributionType = Wrapper.DistributionType.ALL
-}
-
-test {
-  useJUnitPlatform()
 }
 
 bootJar {
