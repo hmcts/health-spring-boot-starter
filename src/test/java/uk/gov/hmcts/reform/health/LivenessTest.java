@@ -26,7 +26,7 @@ class LivenessTest {
 
     @Test
     @DisplayName("Check if endpoint exists.")
-    void failedToAuthenticateUser() {
+    void endpointShouldExistAndReturnAValidResponse() {
         given()
             .port(port)
             .accept(APPLICATION_JSON_VALUE)
